@@ -1,10 +1,19 @@
 ---
 title: "Reporte compartido ER - SF"
-format: html
-editor: visual
+format: 
+  html:
+    editor: visual
+    toc: true
+    toc-title: "Índice"
+    toc-depth: 3
+    toc-location: left
+execute: 
+  warning: false
+  message: false
+  echo: false
 ---
 
-## Quarto
+# Intro
 
 Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
 
