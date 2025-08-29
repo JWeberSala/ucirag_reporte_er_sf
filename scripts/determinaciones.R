@@ -72,7 +72,7 @@ g <- ggplot(deteterm_resumen) +
   theme(plot.title = element_text(hjust = 0.5, size = 13))
 
 
- ggplotly(g, tooltip = c("text"))
+ grafico_virus <- ggplotly(g, tooltip = c("text"))
 
 
 

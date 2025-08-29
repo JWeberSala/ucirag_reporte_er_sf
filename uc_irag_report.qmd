@@ -46,7 +46,7 @@ Analizar las características clínicas, de laboratorio y epidemiológicas de la
 
 ## Unidad centinela: 
 
-### Distribución de los casos por Semana Epidemiológica de Internación
+### Distribución de los casos de IRAG e IRAG extendida por Semana Epidemiológica de Internación
 
 ```{r}
 source('scripts/curvas_sem.R')
@@ -54,4 +54,11 @@ grafico_curvas
   
 # tbl_curvas_fis <- data %>% 
 #                   count(poblacion, SEPI_FECHA_MINIMA)
+```
+
+### Distribución de los resultados de laboratorio por Semana Epidemiológica de Internación
+
+```{r}
+source('scripts/determinaciones.R')
+grafico_virus
 ```
