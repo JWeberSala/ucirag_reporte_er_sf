@@ -6,7 +6,7 @@ library(stringr)
 library(lubridate)
 
 
-source('analisis/leer_base.R')
+source('scripts/leer_base.R')
 
 
 determinacion  <- base %>% select(IDEVENTOCASO, SEPI_FECHA_INTER,
