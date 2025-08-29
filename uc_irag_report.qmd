@@ -13,6 +13,10 @@ execute:
   echo: false
 ---
 
+```{r}
+source('scripts/leer_base.R')
+```
+
 # Introducción
 
 Las infecciones respiratorias agudas (IRAs) constituyen una importante causa de morbimortalidad afectando fundamentalmente a niñas/os menores de cinco años, particularmente aquellos menores de 2 años, adultos mayores y personas susceptibles con patologías de base (cardiovascular, respiratoria, inmunosupresión, entre otras).
@@ -21,19 +25,33 @@ La vigilancia centinela implica la recolección de datos en forma sistemática y
 
 **Este informe es generado de manera conjunta por los equipos de las Unidades Centinela de Entre Rios y Santa Fe, con el objetivo de analizar las características clínicas, de laboratorio y epidemiológicas de las personas con Infección Respiratoria Aguda Grave (IRAG) e IRAG extendida correspondientes a estos establecimientos.**
 
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+Nota: este análisis se realiza teniendo en cuenta los datos registrados en el SNVS hasta la Semana Epidemiológica (SE)
 
 ```{r}
-1 + 1
+SE_corte <- max_se_int -1
+SE_corte
 ```
 
-You can add options to executable code like this
+#### Mapa: Unidades Centinela de Entre Ríos y Santa Fe
 
 ```{r}
-#| echo: false
-2 * 2
+
+
+
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+## Objetivos 
+
+Analizar las características clínicas, de laboratorio y epidemiológicas de las personas con IRAG e IRAG extendida correspondientes a las Unidades Centinela de las jurisdicciones de Santa Fe y Entre Ríos.
+
+## Unidad centinela: 
+
+### Distribución de los casos por Semana Epidemiológica de Internación
+
+```{r}
+source('scripts/curvas_sem.R')
+grafico_curvas
+  
+# tbl_curvas_fis <- data %>% 
+#                   count(poblacion, SEPI_FECHA_MINIMA)
+```

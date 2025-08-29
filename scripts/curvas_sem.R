@@ -4,9 +4,10 @@ library(readxl)
 library(janitor)
 library(stringr)
 library(lubridate)
+library(plotly)
 
 
-source('analisis/leer_base.R')
+source('scripts/leer_base.R')
 
 
 tbl_curvas <- base %>% 
@@ -29,7 +30,7 @@ g <- ggplot(tbl_curvas) +
   theme(plot.title = element_text(hjust = 0.5, size = 13))
 
   
-ggplotly(g, tooltip = c("text")) 
+grafico_curvas <- ggplotly(g, tooltip = c("text")) 
 
   
 # tbl_curvas_fis <- data %>% 
