@@ -155,7 +155,7 @@ VSR_COMORBILIDADES_BARRAS_FIG <- plot_ly(
 
 VSR_COMORBILIDADES_BARRAS_FIG <- VSR_COMORBILIDADES_BARRAS_FIG %>% layout(
   barmode = 'stack',
-  yaxis = list(title = "IRAG con diagnóstico de VSR"),
+  yaxis = list(title = "IRAG con diagnóstico de SARS-CoV-2"),
   xaxis = list(title = "Grupo de Edad")
 )
 
