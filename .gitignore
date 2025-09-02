@@ -1,4 +1,6 @@
+# Ignorar archivos temporales y bases de datos de la carpeta data
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+data/*.csv
