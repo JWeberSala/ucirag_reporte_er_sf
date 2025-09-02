@@ -4,6 +4,7 @@ library(readxl)
 library(janitor)
 library(stringr)
 library(lubridate)
+library(plotly)
 
 
 source('scripts/leer_base.R')
@@ -54,27 +55,27 @@ deteterm_resumen$Determinacion <- factor(deteterm_resumen$Determinacion,
                                                     "VSR", "VSR A", "VSR B", 
                                                     "Influenza A H1N1", "Influenza A (sin subtipificar)"))
 
-library(plotly)
+
 
 g <- ggplot(deteterm_resumen) +
   geom_bar(aes(x = SEPI_FECHA_INTER, y =n , fill = Determinacion ,
                text = paste( Determinacion, '<br>',
                              n)), 
            stat = 'identity', width = 1) +
-    scale_x_continuous(breaks = seq(1, 52,1)) +
+  theme_bw() +
+  scale_x_continuous(breaks = seq(1, 52,1)) +
   scale_fill_manual(values = c('#bdbdbd', '#969696', '#74a9cf', 
                                '#c2e699', '#78c679', '#238443',
                                '#fecc5c', '#fd8d3c')) +
   labs( title = 'Determinaciones', 
         fill = '',
         x = 'Semana de Internación', y = 'Eventos',) +
-  theme(plot.title = element_text(hjust = 0.5, size = 13))+
-  theme(legend.position = "bottom")+
-  theme_bw() 
+  theme(plot.title = element_text(hjust = 0.5, size = 13))
+ # theme(legend.position = "bottom")+
+  
 
 
- grafico_virus <- ggplotly(g, tooltip = c("text"))
-
+grafico_virus <- ggplotly(g, tooltip = c("text"))
 
 
 

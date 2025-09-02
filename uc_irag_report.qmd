@@ -26,9 +26,9 @@ Este informe es generado de manera conjunta por los equipos de Entre Rios y Sant
 #| warning: false
 #| include: false
 
-source('analisis/leer_base.R')
-source('analisis/curvas_sem.R')
-source('analisis/grupos_edad.R')
-source('analisis/determinaciones.R')
+source('scripts/leer_base.R')
+source('scripts/curvas_sem.R')
+source('scripts/grupos_edad.R')
+source('scripts/determinaciones.R')
 
 ```

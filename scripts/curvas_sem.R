@@ -21,7 +21,7 @@ g <- ggplot(tbl_curvas) +
            stat = 'identity', width = 1) +
   facet_wrap(~poblacion, ncol = 1) +
   theme_bw() +
-  scale_x_continuous(breaks = seq(1,40,1)) +
+  scale_x_continuous(breaks = seq(1,52,1)) +
   scale_y_continuous(breaks = seq(0, 10, 2)) +
   scale_fill_manual(values = c('lightblue', 'lightgreen'))+
   labs( title = 'Eventos según semana de internación', 
@@ -33,8 +33,6 @@ g <- ggplot(tbl_curvas) +
 grafico_curvas <- ggplotly(g, tooltip = c("text")) 
 
   
-# tbl_curvas_fis <- data %>% 
-#                   count(poblacion, SEPI_FECHA_MINIMA)
 
 
 
