@@ -23,8 +23,8 @@ base <- read_csv2('data/UC_IRAG_EST80089.csv',
   
              
 # Sacamos la última semana
-max_se_int <- max(base$SEPI_FECHA_INTER, na.rm = T) 
-base <- base %>% dplyr::filter(SEPI_FECHA_INTER <= max_se_int - 1)
+max_se_int <- (max(base$SEPI_FECHA_INTER, na.rm = T) - 1)
+base <- base %>% dplyr::filter(SEPI_FECHA_INTER <= max_se_int)
 
 
 base$EDAD_UC_IRAG_2 <- factor(base$EDAD_UC_IRAG_2,
@@ -43,11 +43,11 @@ base$EDAD_UC_IRAG_2 <- factor(base$EDAD_UC_IRAG_2,
 
 # Total de eventos, pediatricos y adultos
 
-casos_tot <- base %>% 
-             dplyr:: count(poblacion, CLASIFICACION_MANUAL) %>% 
-             pivot_wider(names_from = CLASIFICACION_MANUAL, values_from = n) %>% 
-             adorn_totals('col') %>% 
-             adorn_totals()
+# casos_tot <- base %>% 
+#              dplyr:: count(poblacion, CLASIFICACION_MANUAL) %>% 
+#              pivot_wider(names_from = CLASIFICACION_MANUAL, values_from = n) %>% 
+#              adorn_totals('col') %>% 
+#              adorn_totals()
 
 
 

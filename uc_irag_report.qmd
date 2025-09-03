@@ -13,6 +13,13 @@ execute:
   echo: false
 ---
 
+```{r}
+source('scripts/leer_base.R')
+source('scripts/curvas_sem.R')
+source('scripts/grupos_edad.R')
+source('scripts/determinaciones.R')
+```
+
 # Introducción
 
 Las infecciones respiratorias agudas (IRAs) constituyen una importante causa de morbimortalidad afectando fundamentalmente a niñas/os menores de cinco años, particularmente aquellos menores de 2 años, adultos mayores (\> 60 años) y personas con comorbilidades de riesgo para IRA grave (patología cardiovascular, respiratoria, inmunosupresión, entre otras).
@@ -21,14 +28,45 @@ La estrategia propuesta por OPS de vigilancia centinela implica la recolección 
 
 Este informe es generado de manera conjunta por los equipos de Entre Rios y Santa Fe, con el objetivo de analizar las características clínicas, epidemiológicas y laboratoriales de casos internados con diagnóstico de Infección Respiratoria Aguda Grave (IRAG) e IRAG extendida, en Unidades Centinelas provinciales.
 
-```{r}
-#| message: false
-#| warning: false
-#| include: false
+Este análisis se realiza teniendo en cuenta los datos registrados en el SNVS hasta la Semana Epidemiológica (SE) `r max_se_int` del año `r anio_reporte`.
 
-source('scripts/leer_base.R')
-source('scripts/curvas_sem.R')
-source('scripts/grupos_edad.R')
-source('scripts/determinaciones.R')
+# Objetivos
+
+------------------------------------------------------------------------
+
+Analizar las características clínicas, de laboratorio y epidemiológicas de las personas con IRAG e IRAG extendida correspondientes a las Unidades Centinela de las jurisdicciones de Santa Fe y Entre Ríos.
+
+# Analisis
+
+------------------------------------------------------------------------
+
+## Semana de internación
+
+Distribución de los casos de IRAG e IRAG extendida por Semana Epidemiológica de Internación
+
+```{r}
+
+grafico_curvas
+
+```
+
+## Grupos de edad
+
+Distribución de los casos de IRAG e IRAG extendida por grupos de edad
+
+```{r}
+
+grafico_edad
+
+```
+
+## Determinaciones
+
+```{r}
+#| fig-width: 8
+#| fig-height: 5
+#| fig-align: "center"
+#| fig-cap: ""
+grafico_virus
 
 ```

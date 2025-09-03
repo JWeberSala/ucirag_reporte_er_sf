@@ -4,10 +4,7 @@ library(readxl)
 library(janitor)
 library(stringr)
 library(lubridate)
-
-
-source('scripts/leer_base.R')
-
+library(plotly)
 
 
 
@@ -29,7 +26,7 @@ g <- ggplot(tbl_edad) +
         fill = '',
         x = 'Grupos de edad', y = 'Eventos',) +
   theme(plot.title = element_text(hjust = 0.5, size = 13),legend.position = 'none') +
-  scale_fill_manual(values = c('lightblue', 'lightgreen'))
+  scale_fill_manual(values = c('#748DAE', '#78C841'))
  
 
  

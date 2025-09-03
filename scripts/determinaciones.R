@@ -7,9 +7,6 @@ library(lubridate)
 library(plotly)
 
 
-source('scripts/leer_base.R')
-
-
 determinacion  <- base %>% select(IDEVENTOCASO, SEPI_FECHA_INTER,
                                   COVID_19_FINAL, VSR_FINAL, INFLUENZA_FINAL)
 
@@ -62,18 +59,16 @@ g <- ggplot(deteterm_resumen) +
                text = paste( Determinacion, '<br>',
                              n)), 
            stat = 'identity', width = 1) +
-  theme_bw() +
+  theme_classic() +
   scale_x_continuous(breaks = seq(1, 52,1)) +
   scale_fill_manual(values = c('#bdbdbd', '#969696', '#74a9cf', 
                                '#c2e699', '#78c679', '#238443',
                                '#fecc5c', '#fd8d3c')) +
-  labs( title = 'Determinaciones', 
+  labs( title = '', 
         fill = '',
         x = 'Semana de Internación', y = 'Eventos',) +
-  theme(plot.title = element_text(hjust = 0.5, size = 13))
- # theme(legend.position = "bottom")+
-  
-
+  theme(plot.title = element_text(hjust = 0.5, size = 13), legend.position = 'none')+
+  theme(legend.position = 'none')
 
 grafico_virus <- ggplotly(g, tooltip = c("text"))
 
