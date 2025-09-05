@@ -7,9 +7,9 @@ library(lubridate)
 library(plotly)
 
 #análisis para las comorbildiades de IRAG
-
+unique(base$CLASIFICACION_MANUAL)
 B_COMORBILIDADES_IRAG<-base %>% 
-  filter(CLASIFICACION_MANUAL=="Infección respiratoria aguda grave (IRAG)") %>% 
+  #filter(CLASIFICACION_MANUAL=="Infección respiratoria aguda grave (IRAG)") %>% 
   mutate(PRESENCIA_COMORBILIDADES=case_when(
     PRESENCIA_COMORBILIDADES == 1 ~ "Con Comorbilidades",
     PRESENCIA_COMORBILIDADES == 2 ~ "Sin Comorbilidades",
@@ -31,51 +31,79 @@ grupos_edad <- c("Menores de 6 Meses", "6 a 11 Meses",
 
 
 IRAG_COMORBILIDADES<-B_COMORBILIDADES_IRAG %>%
-  group_by(EDAD_UC_IRAG_2, PRESENCIA_COMORBILIDADES) %>%
+  group_by(CLASIFICACION_MANUAL, EDAD_UC_IRAG_2, PRESENCIA_COMORBILIDADES) %>%
   summarise(N= n())
 
   
  #Gráfico IRAG ABSOLUTO
 
-IRAG_COMORBILIDADES_BARRAS_FIG <- plot_ly(
-  IRAG_COMORBILIDADES,
-  x = ~EDAD_UC_IRAG_2,
-  y = ~N,
-  color = ~PRESENCIA_COMORBILIDADES,
-  type = 'bar'
-)
+IRAG_COMORBILIDADES_BARRAS_FIG <- ggplot(IRAG_COMORBILIDADES, aes(
+  x = EDAD_UC_IRAG_2,
+  y = N,
+  fill = PRESENCIA_COMORBILIDADES
+)) +
+  geom_bar(stat = "identity", position = "stack") +
+  facet_wrap(~ CLASIFICACION_MANUAL, ncol=1) +   # facetado por clasificación
+  labs(
+    x = "Grupo de Edad",
+    y = "Casos de IRAG",
+    fill = "Comorbilidades"
+  ) +
+  scale_fill_manual(
+    values = c(
+      "Con Comorbilidades" = "#FFB6C1",   # verde pastel
+      "Sin Comorbilidades" = "#C7F0B0",   # rosa pastel
+      "Sin Dato de Comorbilidades" = "grey80"             # gris claro
+    )) +
+ 
+  theme_minimal() +
+     
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1) # gira etiquetas si son largas
+  )
 
-IRAG_COMORBILIDADES_BARRAS_FIG <- IRAG_COMORBILIDADES_BARRAS %>% layout(
-  barmode = 'stack',
-  yaxis = list(title = "Casos de IRAG"),
-  xaxis = list(title = "Grupo de Edad")
-)
-
+# Convertir a plotly interactivo
+IRAG_COMORBILIDADES_BARRAS_FIG <- ggplotly(IRAG_COMORBILIDADES_BARRAS_FIG)
 IRAG_COMORBILIDADES_BARRAS_FIG
 
 
 
 #Gráfico IRAG RELATIVO
-IRAG_COMORBILIDADES_RELATIVO<- IRAG_COMORBILIDADES %>% 
-  group_by(EDAD_UC_IRAG_2) %>%
+
+
+IRAG_COMORBILIDADES_RELATIVO <- IRAG_COMORBILIDADES %>%
+  group_by(CLASIFICACION_MANUAL, EDAD_UC_IRAG_2) %>%
   mutate(Proporcion = N / sum(N) * 100)
 
+IRAG_COMORBILIDADES_RELATIV_FIG <- ggplot(IRAG_COMORBILIDADES_RELATIVO, aes(
+  x = EDAD_UC_IRAG_2,
+  y = Proporcion,
+  fill = PRESENCIA_COMORBILIDADES
+)) +
+  geom_bar(stat = "identity", position = "stack") +
+  facet_grid(rows = vars(CLASIFICACION_MANUAL))  +   # 
+  labs(
+    x = "Grupo de Edad",
+    y = "Porcentaje",
+    fill = "Comorbilidades"
+  ) +
+  scale_fill_manual(
+    values = c(
+      "Con Comorbilidades" = "#FFB6C1",   # verde pastel
+      "Sin Comorbilidades" = "#C7F0B0",   # rosa pastel
+      "Sin Dato de Comorbilidades" = "grey80"             # gris claro
+    )) +
+  
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    strip.text.y = element_text(size = 6)  
+  )
 
-IRAG_COMORBILIDADES_RELATIV_FIG<- plot_ly(
-  IRAG_COMORBILIDADES_RELATIVO,
-  x = ~EDAD_UC_IRAG_2,
-  y = ~Proporcion,
-  color = ~PRESENCIA_COMORBILIDADES,
-  type = 'bar'
-)
-
-IRAG_COMORBILIDADES_RELATIV_FIG <- IRAG_COMORBILIDADES_RELATIV_FIG %>% layout(
-  barmode = 'stack',
-  yaxis = list(title = "Porcentaje", ticksuffix = "%"),
-  xaxis = list(title = "Grupo de Edad")
-)
-
+IRAG_COMORBILIDADES_RELATIV_FIG <- ggplotly(IRAG_COMORBILIDADES_RELATIV_FIG)
 IRAG_COMORBILIDADES_RELATIV_FIG
+
+
 
 
 
@@ -101,13 +129,18 @@ Tabla_Comorbilidades_Flu <- Tabla_Comorbilidades_Flu %>%
     fill = list(N = 0)
   )
 
-
+colores_fijos <- c(
+  "Con Comorbilidades" = "#FFB6C1",   
+  "Sin Comorbilidades" = "#C7F0B0",   
+  "Sin Dato de Comorbilidades" = "grey80"            
+)
 
 FLU_COMORBILIDADES_BARRAS_FIG <- plot_ly(
   Tabla_Comorbilidades_Flu,
   x = ~EDAD_UC_IRAG_2,
   y = ~N,
   color = ~PRESENCIA_COMORBILIDADES,
+  colors = colores_fijos,
   type = 'bar'
 )
 
@@ -118,9 +151,6 @@ FLU_COMORBILIDADES_BARRAS_FIG <- FLU_COMORBILIDADES_BARRAS_FIG %>% layout(
 )
 
 FLU_COMORBILIDADES_BARRAS_FIG
-
-
-
 
 
 #VSR
@@ -150,12 +180,13 @@ VSR_COMORBILIDADES_BARRAS_FIG <- plot_ly(
   x = ~EDAD_UC_IRAG_2,
   y = ~N,
   color = ~PRESENCIA_COMORBILIDADES,
+  colors = colores_fijos,
   type = 'bar'
 )
 
 VSR_COMORBILIDADES_BARRAS_FIG <- VSR_COMORBILIDADES_BARRAS_FIG %>% layout(
   barmode = 'stack',
-  yaxis = list(title = "IRAG con diagnóstico de SARS-CoV-2"),
+  yaxis = list(title = "IRAG con diagnóstico de VSR"),
   xaxis = list(title = "Grupo de Edad")
 )
 
@@ -169,7 +200,6 @@ VSR_COMORBILIDADES_BARRAS_FIG
 
 
 ##ACA NO HAY CASOS DE SARS, POR LO QUE DEBERÍAMOS VER COMO CREAR UNA FUNCION QUE SI NO HAY CASOS, NO LOS DESCRIBA. PERO SI APARECEN SI DESCRIBIRLOS####
-unique(B_COMORBILIDADES_IRAG$COVID_19_FINAL)
 Tabla_Comorbilidades_COVID<-B_COMORBILIDADES_IRAG %>% 
   filter(COVID_19_FINAL!="Sin resultado" & COVID_19_FINAL!="Negativo") %>% 
   group_by(EDAD_UC_IRAG_2, PRESENCIA_COMORBILIDADES) %>%
@@ -194,12 +224,13 @@ covid_COMORBILIDADES_BARRAS_FIG <- plot_ly(
   x = ~EDAD_UC_IRAG_2,
   y = ~N,
   color = ~PRESENCIA_COMORBILIDADES,
+  colors = colores_fijos,
   type = 'bar'
 )
 
 covid_COMORBILIDADES_BARRAS_FIG <- covid_COMORBILIDADES_BARRAS_FIG %>% layout(
   barmode = 'stack',
-  yaxis = list(title = "IRAG con diagnóstico de VSR"),
+  yaxis = list(title = "IRAG con diagnóstico de SARS-CoV-2"),
   xaxis = list(title = "Grupo de Edad")
 )
 
@@ -208,79 +239,4 @@ covid_COMORBILIDADES_BARRAS_FIG
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-Tabla_Comorbilidades_IRAG<-orden_edad_uc_irag %>% 
-  left_join(Tabla_Comorbilidades_Flu, by="EDAD_UC_IRAG") %>% 
-  left_join(Tabla_Comorbilidades_VSR, by="EDAD_UC_IRAG") %>% 
-  left_join(Tabla_Comorbilidades_COVID, by="EDAD_UC_IRAG") 
-
-rm(Tabla_Comorbilidades_Flu, Tabla_Comorbilidades_VSR,
-   Tabla_Comorbilidades_COVID)
-
-
-
-#PARA IRAG EXTENDIDA
-
-
-B_COMORBILIDADES_IRAG_ext<-base %>% 
-  filter(CLASIFICACION_MANUAL=="IRAG extendida") %>% 
-  filtrar_por_rango(anio_actual, 
-                    se_actual, 
-                    rango = 1, 
-                    col_anio = "ANIO_MIN_INTERNACION", 
-                    col_semana = "SEPI_MIN_INTERNACION")
-
-
-
-
-
-
-Tabla_Comorbilidades_Flu<-B_COMORBILIDADES_IRAG_ext %>% 
-  filter(INFLUENZA_FINAL!="Sin resultado" & INFLUENZA_FINAL!="Negativo") %>% 
-  group_by(EDAD_UC_IRAG, PRESENCIA_COMORBILIDADES) %>%
-  summarise(N= n()) %>% 
-  spread( PRESENCIA_COMORBILIDADES, N) %>% 
-  rename("Influenza Con Comorbilidades"="1", 
-         "Influenza Sin Comorbilidades"="2",
-         "Influenza SD Comorbilidades"="9")
-
-
-Tabla_Comorbilidades_VSR<-B_COMORBILIDADES_IRAG_ext %>% 
-  filter(VSR_FINAL!="Sin resultado" & VSR_FINAL!="Negativo") %>% 
-  group_by(EDAD_UC_IRAG, PRESENCIA_COMORBILIDADES) %>%
-  summarise(N= n()) %>% 
-  spread( PRESENCIA_COMORBILIDADES, N) %>% 
-  rename("VSR Con Comorbilidades"="1", 
-         "VSR Sin Comorbilidades"="2",
-         "VSR SD Comorbilidades"="9")
-
-Tabla_Comorbilidades_COVID<-B_COMORBILIDADES_IRAG_ext %>% 
-  filter(COVID_19_FINAL!="Sin resultado" & COVID_19_FINAL!="Negativo") %>% 
-  group_by(EDAD_UC_IRAG, PRESENCIA_COMORBILIDADES) %>%
-  summarise(N= n()) %>% 
-  spread( PRESENCIA_COMORBILIDADES, N) %>% 
-  rename("SARS COV2 Con Comorbilidades"="1", 
-         "SARS COV2  Sin Comorbilidades"="2",
-         "SARS COV2  SD Comorbilidades"="9")
-
-
-Tabla_Comorbilidades_IRAG_ext<-orden_edad_uc_irag %>% 
-  left_join(Tabla_Comorbilidades_Flu, by="EDAD_UC_IRAG") %>% 
-  left_join(Tabla_Comorbilidades_VSR, by="EDAD_UC_IRAG") %>% 
-  left_join(Tabla_Comorbilidades_COVID, by="EDAD_UC_IRAG") 
-
-rm(Tabla_Comorbilidades_Flu, Tabla_Comorbilidades_VSR,
-   Tabla_Comorbilidades_COVID)
 
