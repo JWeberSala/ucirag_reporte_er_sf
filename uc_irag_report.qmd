@@ -18,6 +18,8 @@ source('scripts/leer_base.R')
 source('scripts/curvas_sem.R')
 source('scripts/grupos_edad.R')
 source('scripts/determinaciones.R')
+source('scripts/mapas.R')
+
 ```
 
 # Introducción
@@ -35,6 +37,27 @@ Este análisis se realiza teniendo en cuenta los datos registrados en el SNVS ha
 ------------------------------------------------------------------------
 
 Analizar las características clínicas, de laboratorio y epidemiológicas de las personas con IRAG e IRAG extendida correspondientes a las Unidades Centinela de las jurisdicciones de Santa Fe y Entre Ríos.
+
+
+# Establecimientos
+
+-------------------------------------------------------------------
+
+La notificación bajo la estrategia de unidad centinela se lleva a cabo en los siguientes establecimientos:
+
+- Hospital Materno Infantil San Roque, Paraná, Entre Ríos
+- Hospital Centenario, Paraná, Entre Ríos
+- Hospital Provincial de Rosario, Rosario, Santa Fe
+
+
+```{r}
+
+mapa_establ
+
+```
+
+
+
 
 # Analisis
 
