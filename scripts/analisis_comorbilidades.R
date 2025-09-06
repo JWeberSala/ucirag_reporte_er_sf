@@ -35,7 +35,7 @@ IRAG_COMORBILIDADES<-B_COMORBILIDADES_IRAG %>%
   summarise(N= n())
 
   
- #Gráfico IRAG ABSOLUTO
+ #Gráfico IRAG/IRAG EXTENDIDO ABSOLUTO
 
 IRAG_COMORBILIDADES_BARRAS_FIG <- ggplot(IRAG_COMORBILIDADES, aes(
   x = EDAD_UC_IRAG_2,
@@ -45,6 +45,7 @@ IRAG_COMORBILIDADES_BARRAS_FIG <- ggplot(IRAG_COMORBILIDADES, aes(
   geom_bar(stat = "identity", position = "stack") +
   facet_wrap(~ CLASIFICACION_MANUAL, ncol=1) +   # facetado por clasificación
   labs(
+    title = 'Distribución de casos de IRAG e IRAG extendida por grupo de edad según presencia de comorbilidades',
     x = "Grupo de Edad",
     y = "Casos de IRAG",
     fill = "Comorbilidades"
@@ -56,24 +57,36 @@ IRAG_COMORBILIDADES_BARRAS_FIG <- ggplot(IRAG_COMORBILIDADES, aes(
       "Sin Dato de Comorbilidades" = "grey80"             # gris claro
     )) +
  
-  theme_minimal() +
+  theme_bw() +
      
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1) # gira etiquetas si son largas
   )
 
 # Convertir a plotly interactivo
-IRAG_COMORBILIDADES_BARRAS_FIG <- ggplotly(IRAG_COMORBILIDADES_BARRAS_FIG)
-IRAG_COMORBILIDADES_BARRAS_FIG
+IRAG_COMORBILIDADES_BARRAS_FIG <- ggplotly(IRAG_COMORBILIDADES_BARRAS_FIG)%>% 
+  layout(
+    legend = list(
+      orientation = "h", 
+      x = 0.3,             
+      xanchor = "center",
+      y = -0.2,            
+      font = list(size = 10)  
+    )
+  )
+#IRAG_COMORBILIDADES_BARRAS_FIG
 
 
 
 #Gráfico IRAG RELATIVO
 
-
+unique(IRAG_COMORBILIDADES_RELATIVO$CLASIFICACION_MANUAL)
 IRAG_COMORBILIDADES_RELATIVO <- IRAG_COMORBILIDADES %>%
   group_by(CLASIFICACION_MANUAL, EDAD_UC_IRAG_2) %>%
-  mutate(Proporcion = N / sum(N) * 100)
+  mutate(Proporcion = N / sum(N) * 100) %>% 
+  mutate(CLASIFICACION_MANUAL=case_when(
+    CLASIFICACION_MANUAL=="Infección respiratoria aguda grave (IRAG)" ~ "IRAG",
+    CLASIFICACION_MANUAL=="IRAG extendida" ~ "IRAG ext."))
 
 IRAG_COMORBILIDADES_RELATIV_FIG <- ggplot(IRAG_COMORBILIDADES_RELATIVO, aes(
   x = EDAD_UC_IRAG_2,
@@ -83,6 +96,8 @@ IRAG_COMORBILIDADES_RELATIV_FIG <- ggplot(IRAG_COMORBILIDADES_RELATIVO, aes(
   geom_bar(stat = "identity", position = "stack") +
   facet_grid(rows = vars(CLASIFICACION_MANUAL))  +   # 
   labs(
+    title = 'Distribución Relativa de Casos de IRAG e IRAG extendida por grupo de edad según presencia de comorbilidades',
+    
     x = "Grupo de Edad",
     y = "Porcentaje",
     fill = "Comorbilidades"
@@ -94,20 +109,31 @@ IRAG_COMORBILIDADES_RELATIV_FIG <- ggplot(IRAG_COMORBILIDADES_RELATIVO, aes(
       "Sin Dato de Comorbilidades" = "grey80"             # gris claro
     )) +
   
-  theme_minimal() +
+  theme_bw() +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),
-    strip.text.y = element_text(size = 6)  
-  )
+    strip.text.y = element_text(size = 8))
 
-IRAG_COMORBILIDADES_RELATIV_FIG <- ggplotly(IRAG_COMORBILIDADES_RELATIV_FIG)
-IRAG_COMORBILIDADES_RELATIV_FIG
+IRAG_COMORBILIDADES_RELATIV_FIG <- ggplotly(IRAG_COMORBILIDADES_RELATIV_FIG)  %>% 
+  layout(
+    legend = list(
+      orientation = "h", 
+      x = 0.3,             
+      xanchor = "center",
+      y = -0.2,            
+      font = list(size = 10)  
+    )
+  )
+#IRAG_COMORBILIDADES_RELATIV_FIG
 
 
 
 
 
 #Según resultado de laboratorio, para casos de Influenza, VSR y SARS CoV 2
+#SOLO PARA CASOS DE IRAG, PORQUE EXTENDIDA SON MUY POCOS.
+#PODEMOS VER SI TAL VEZ PARA PEDIATRIA SE PUEDE INCLUIR, PERO DEBERIA SER SEPARADOS. 
+B_COMORBILIDADES_IRAG<-B_COMORBILIDADES_IRAG %>% filter(CLASIFICACION_MANUAL=="Infección respiratoria aguda grave (IRAG)")
 
 #Influenza
 
@@ -146,11 +172,12 @@ FLU_COMORBILIDADES_BARRAS_FIG <- plot_ly(
 
 FLU_COMORBILIDADES_BARRAS_FIG <- FLU_COMORBILIDADES_BARRAS_FIG %>% layout(
   barmode = 'stack',
+  title = "Distribución de IRAG con diagnóstico de Influenza por grupo de edad y presencia de comorbilidades",
   yaxis = list(title = "IRAG con diagnóstico de Influenza"),
   xaxis = list(title = "Grupo de Edad")
 )
 
-FLU_COMORBILIDADES_BARRAS_FIG
+#FLU_COMORBILIDADES_BARRAS_FIG
 
 
 #VSR
@@ -186,11 +213,12 @@ VSR_COMORBILIDADES_BARRAS_FIG <- plot_ly(
 
 VSR_COMORBILIDADES_BARRAS_FIG <- VSR_COMORBILIDADES_BARRAS_FIG %>% layout(
   barmode = 'stack',
-  yaxis = list(title = "IRAG con diagnóstico de VSR"),
+  title = "Distribución de IRAG con diagnóstico de VSR por grupo de edad y presencia de comorbilidades",
+    yaxis = list(title = "IRAG con diagnóstico de VSR"),
   xaxis = list(title = "Grupo de Edad")
 )
 
-VSR_COMORBILIDADES_BARRAS_FIG
+#VSR_COMORBILIDADES_BARRAS_FIG
 
 
 
@@ -230,11 +258,12 @@ covid_COMORBILIDADES_BARRAS_FIG <- plot_ly(
 
 covid_COMORBILIDADES_BARRAS_FIG <- covid_COMORBILIDADES_BARRAS_FIG %>% layout(
   barmode = 'stack',
-  yaxis = list(title = "IRAG con diagnóstico de SARS-CoV-2"),
+  title = "Distribución de IRAG con diagnóstico de SARS-CoV-2 por grupo de edad y presencia de comorbilidades",
+    yaxis = list(title = "IRAG con diagnóstico de SARS-CoV-2"),
   xaxis = list(title = "Grupo de Edad")
 )
 
-covid_COMORBILIDADES_BARRAS_FIG
+#covid_COMORBILIDADES_BARRAS_FIG
 
 
 
