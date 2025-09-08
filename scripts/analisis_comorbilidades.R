@@ -7,7 +7,7 @@ library(lubridate)
 library(plotly)
 
 #análisis para las comorbildiades de IRAG
-unique(base$CLASIFICACION_MANUAL)
+# unique(base$CLASIFICACION_MANUAL)
 B_COMORBILIDADES_IRAG<-base %>% 
   #filter(CLASIFICACION_MANUAL=="Infección respiratoria aguda grave (IRAG)") %>% 
   mutate(PRESENCIA_COMORBILIDADES=case_when(
@@ -40,12 +40,11 @@ IRAG_COMORBILIDADES<-B_COMORBILIDADES_IRAG %>%
 IRAG_COMORBILIDADES_BARRAS_FIG <- ggplot(IRAG_COMORBILIDADES, aes(
   x = EDAD_UC_IRAG_2,
   y = N,
-  fill = PRESENCIA_COMORBILIDADES
-)) +
-  geom_bar(stat = "identity", position = "stack") +
+  fill = PRESENCIA_COMORBILIDADES )) +
+  geom_bar( stat = "identity", position = "stack") +
   facet_wrap(~ CLASIFICACION_MANUAL, ncol=1) +   # facetado por clasificación
   labs(
-    title = 'Distribución de casos de IRAG e IRAG extendida por grupo de edad según presencia de comorbilidades',
+    title = ' ',
     x = "Grupo de Edad",
     y = "Casos de IRAG",
     fill = "Comorbilidades"
@@ -71,16 +70,16 @@ IRAG_COMORBILIDADES_BARRAS_FIG <- ggplotly(IRAG_COMORBILIDADES_BARRAS_FIG)%>%
       x = 0.3,             
       xanchor = "center",
       y = -0.2,            
-      font = list(size = 10)  
+      font = list(size = 8)  
     )
   )
-#IRAG_COMORBILIDADES_BARRAS_FIG
+# IRAG_COMORBILIDADES_BARRAS_FIG
 
 
 
 #Gráfico IRAG RELATIVO
 
-unique(IRAG_COMORBILIDADES_RELATIVO$CLASIFICACION_MANUAL)
+# unique(IRAG_COMORBILIDADES_RELATIVO$CLASIFICACION_MANUAL)
 IRAG_COMORBILIDADES_RELATIVO <- IRAG_COMORBILIDADES %>%
   group_by(CLASIFICACION_MANUAL, EDAD_UC_IRAG_2) %>%
   mutate(Proporcion = N / sum(N) * 100) %>% 

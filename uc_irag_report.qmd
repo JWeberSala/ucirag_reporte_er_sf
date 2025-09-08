@@ -5,7 +5,7 @@ format:
     editor: visual
     toc: true
     toc-title: "Índice"
-    toc-depth: 3
+    toc-depth: 4
     toc-location: left
 execute: 
   warning: false
@@ -19,10 +19,11 @@ source('scripts/curvas_sem.R')
 source('scripts/grupos_edad.R')
 source('scripts/determinaciones.R')
 source('scripts/mapas.R')
+source('scripts/analisis_comorbilidades.R')
 
 ```
 
-# Introducción
+## Introducción
 
 Las infecciones respiratorias agudas (IRAs) constituyen una importante causa de morbimortalidad afectando fundamentalmente a niñas/os menores de cinco años, particularmente aquellos menores de 2 años, adultos mayores (\> 60 años) y personas con comorbilidades de riesgo para IRA grave (patología cardiovascular, respiratoria, inmunosupresión, entre otras).
 
@@ -32,13 +33,13 @@ Este informe es generado de manera conjunta por los equipos de Entre Rios y Sant
 
 Este análisis se realiza teniendo en cuenta los datos registrados en el SNVS hasta la Semana Epidemiológica `r max_se_int` (`r inicio_sem` al `r fin_sem`) del año `r anio_reporte`.
 
-# Objetivos
+## Objetivos
 
 ------------------------------------------------------------------------
 
 Analizar las características clínicas, de laboratorio y epidemiológicas de las personas con IRAG e IRAG extendida correspondientes a las Unidades Centinela de las jurisdicciones de Santa Fe y Entre Ríos.
 
-# Establecimientos
+## Establecimientos
 
 ------------------------------------------------------------------------
 
@@ -54,11 +55,10 @@ mapa_establ
 
 ```
 
-# Analisis
+## Analisis
 
-------------------------------------------------------------------------
 
-## Semana de internación
+### Semana de internación
 
 Distribución de los casos de IRAG e IRAG extendida por Semana Epidemiológica de Internación
 
@@ -68,7 +68,7 @@ grafico_curvas
 
 ```
 
-## Grupos de edad
+### Grupos de edad
 
 Distribución de los casos de IRAG e IRAG extendida por grupos de edad
 
@@ -78,7 +78,8 @@ grafico_edad
 
 ```
 
-## Determinaciones
+### Determinaciones
+
 
 ```{r}
 #| fig-width: 8
@@ -88,3 +89,17 @@ grafico_edad
 grafico_virus
 
 ```
+
+
+### Comorbilidades
+
+Distribución de casos de IRAG e IRAG extendida por grupo de edad según presencia de comorbilidades
+
+```{r}
+
+IRAG_COMORBILIDADES_BARRAS_FIG
+
+```
+
+
+
