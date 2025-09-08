@@ -27,6 +27,30 @@ max_se_int <- (max(base$SEPI_FECHA_INTER, na.rm = T) - 1)
 base <- base %>% dplyr::filter(SEPI_FECHA_INTER <= max_se_int)
 
 
+
+# Crear una secuencia de todas las fechas del año 2025
+fechas_2025 <- seq(as.Date("2024-12-29"), as.Date("2025-12-27"), by = "day")
+
+
+
+# Crear el calendario
+calendario_completo <- data.frame(fecha = fechas_2025) %>%
+  mutate(
+    anio_epi = year(fecha),
+    semana_epi = epiweek(fecha))
+
+
+
+inicio_sem <- format(first(calendario_completo %>% filter(semana_epi == max_se_int))[1,1], "%d de %B")
+fin_sem <- format(last(calendario_completo %>% filter(semana_epi == max_se_int))[1,1], "%d de %B")
+
+
+
+
+
+
+
+
 base$EDAD_UC_IRAG_2 <- factor(base$EDAD_UC_IRAG_2,
                               levels = c("Menores de 6 Meses", "6 a 11 Meses",
                                          "12 a 23 Meses", '02 a 04 Años', 

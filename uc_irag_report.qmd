@@ -30,7 +30,7 @@ La estrategia propuesta por OPS de vigilancia centinela implica la recolección 
 
 Este informe es generado de manera conjunta por los equipos de Entre Rios y Santa Fe, con el objetivo de analizar las características clínicas, epidemiológicas y laboratoriales de casos internados con diagnóstico de Infección Respiratoria Aguda Grave (IRAG) e IRAG extendida, en Unidades Centinelas provinciales.
 
-Este análisis se realiza teniendo en cuenta los datos registrados en el SNVS hasta la Semana Epidemiológica (SE) `r max_se_int` del año `r anio_reporte`.
+Este análisis se realiza teniendo en cuenta los datos registrados en el SNVS hasta la Semana Epidemiológica `r max_se_int` (`r inicio_sem` al `r fin_sem`) del año `r anio_reporte`.
 
 # Objetivos
 
@@ -38,26 +38,21 @@ Este análisis se realiza teniendo en cuenta los datos registrados en el SNVS ha
 
 Analizar las características clínicas, de laboratorio y epidemiológicas de las personas con IRAG e IRAG extendida correspondientes a las Unidades Centinela de las jurisdicciones de Santa Fe y Entre Ríos.
 
-
 # Establecimientos
 
--------------------------------------------------------------------
+------------------------------------------------------------------------
 
 La notificación bajo la estrategia de unidad centinela se lleva a cabo en los siguientes establecimientos:
 
-- Hospital Materno Infantil San Roque, Paraná, Entre Ríos
-- Hospital Centenario, Paraná, Entre Ríos
-- Hospital Provincial de Rosario, Rosario, Santa Fe
-
+-   Hospital Materno Infantil San Roque, Paraná, Entre Ríos
+-   Hospital Centenario, Paraná, Entre Ríos
+-   Hospital Provincial de Rosario, Rosario, Santa Fe
 
 ```{r}
 
 mapa_establ
 
 ```
-
-
-
 
 # Analisis
 
