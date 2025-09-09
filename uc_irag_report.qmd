@@ -20,6 +20,7 @@ source('scripts/grupos_edad.R')
 source('scripts/determinaciones.R')
 source('scripts/mapas.R')
 source('scripts/analisis_comorbilidades.R')
+source('scripts/comorb.R')
 
 ```
 
@@ -100,6 +101,18 @@ Distribución de casos de IRAG e IRAG extendida por grupo de edad según presenc
 IRAG_COMORBILIDADES_BARRAS_FIG
 
 ```
+
+
+```{r}
+grafica_comorb_irag
+```
+
+
+```{r}
+grafica_comorb_irag_extend
+
+```
+
 
 
 
