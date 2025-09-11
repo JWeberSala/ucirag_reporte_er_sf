@@ -6,6 +6,7 @@ library(stringr)
 library(lubridate)
 library(highcharter)
 library(plotly)
+library(flextable)
 
 
 base_comorb <- base %>%
@@ -15,7 +16,7 @@ base_comorb <- base %>%
             PRESENCIA_COMORBILIDADES == 9 ~ "Sin Dato de Comorbilidades"))
 
 
-
+total_eventos <- nrow(base_comorb)
 
 
 # Graficos con ggplot
@@ -97,6 +98,93 @@ grafica_comorb_irag_extend <- highchart() |>
   hc_add_series(name = "Con Comorbilidades", 
                 data = tbl_comorb_irag_ext$`Con Comorbilidades`, color = "#1f77b4") |>
   hc_title(text = "Presencia de Comorbilidades: IRAG extendida")
+
+
+
+
+
+# Tabla con diferentes comorbilidades
+
+# compare_df_cols(base) %>% view()
+
+
+frec_comorb <- base %>% filter(PRESENCIA_COMORBILIDADES == 1) %>%  # 1
+  select(IDEVENTOCASO, c(54:86), poblacion) %>%                    # 2
+  pivot_longer(c(2:34), names_to = 'comorbilidad', values_to = 'n') %>%   # 3
+  filter(n == 1) %>%                                               # 4
+  count(poblacion, comorbilidad)                               # 5
+
+frec_comorb$comorbilidad <- str_replace_all( frec_comorb$comorbilidad,"[ _ ]", " ")
+frec_comorb$comorbilidad <- str_to_title(frec_comorb$comorbilidad)
+
+
+# 1- Filtro todos los eventos dónde la variable PRESENCIA_COMORBILIDADES == 1
+#    lo que significa que se registro alguna comorbilidad
+# 2- Elijo las variables IDEVENTOCASO, poblacion (la creamos nosostros y  
+#    puede toma los valores 'Adultos' o 'Pediatrica'), y las columnas que representan
+#    la lista de comorbilidades posibles que están desde la columna 54 hasta la 86
+# 3- Agrupo todas las columnas de comorbilidades en una nueva
+# 4- Filtro las filas que tienen valor igual a 1 lo que significa presencia de comorbilidad específica
+# 5- Realizo una tabla de frecuencia para cada comorbilidad y poblacion
+
+
+
+# Adultos
+
+adultos_tot <- nrow(base %>% filter( poblacion == 'Adultos'))
+adultos_con_comorb <- nrow(base %>% filter(PRESENCIA_COMORBILIDADES == 1, poblacion == 'Adultos'))
+
+
+
+comorb_adult <- frec_comorb %>% filter(poblacion == 'Adultos') %>% 
+  group_by(comorbilidad) %>% 
+  summarise(cantidad = sum(n),
+            Proporción = paste(round(cantidad/adultos_con_comorb *100,1), '%')) %>% 
+  arrange(desc(cantidad)) %>% head(5) %>% 
+  select(-cantidad)
+
+
+tbl_comorb_adult <- flextable(comorb_adult) %>% 
+  set_header_labels (comorbilidad = 'Comorbilidades') %>% 
+  width(j = ~ comorbilidad,  width = 2) %>% 
+  theme_vanilla() %>% 
+  align(align = "right",  j = 2) %>% 
+  bg(bg='#708993', part = 'header')  %>% 
+  color(color = 'white', part = 'header') 
+
+
+
+# Pediatricos
+
+pediat_tot <- nrow(base %>% filter( poblacion == 'Pediatrica'))
+pediat_con_comorb <- nrow(base %>% filter(PRESENCIA_COMORBILIDADES == 1, poblacion == 'Pediatrica'))
+
+
+
+comorb_pediat <- frec_comorb %>% filter(poblacion == 'Pediatrica') %>% 
+  group_by(comorbilidad) %>% 
+  summarise(cantidad = sum(n),
+            Proporción = paste(round(cantidad/adultos_con_comorb *100,1), '%'))%>% 
+  arrange(desc(cantidad)) %>% head(5) %>% 
+  select(-cantidad)
+
+
+tbl_comorb_pediat <- flextable(comorb_pediat) %>% 
+  set_header_labels (comorbilidad = 'Comorbilidades') %>% 
+  width(j = ~ comorbilidad,  width = 2) %>% 
+  theme_vanilla() %>% 
+  align(align = "right",  j = 2) %>% 
+  bg(bg='#708993', part = 'header')  %>% 
+  color(color = 'white', part = 'header') 
+
+
+
+
+
+
+
+
+
 
 
 

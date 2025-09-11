@@ -58,7 +58,6 @@ mapa_establ
 
 ## Analisis
 
-
 ### Semana de internación
 
 Distribución de los casos de IRAG e IRAG extendida por Semana Epidemiológica de Internación
@@ -81,7 +80,6 @@ grafico_edad
 
 ### Determinaciones
 
-
 ```{r}
 #| fig-width: 8
 #| fig-height: 5
@@ -91,8 +89,11 @@ grafico_virus
 
 ```
 
-
 ### Comorbilidades
+
+Se notificaron un total de `r total_eventos` eventos. De estos, `r adultos_tot` ocurrieron en adultos (15 años o más), y `r adultos_con_comorb` de ellos presentaban alguna comorbilidad. En la población pediátrica (menores de 15 años) se registraron `r pediat_tot` eventos, de los cuales `r pediat_con_comorb` presentaban alguna comorbilidad.
+
+<br>
 
 Distribución de casos de IRAG e IRAG extendida por grupo de edad según presencia de comorbilidades
 
@@ -102,16 +103,38 @@ IRAG_COMORBILIDADES_BARRAS_FIG
 
 ```
 
-
 ```{r}
 grafica_comorb_irag
 ```
-
 
 ```{r}
 grafica_comorb_irag_extend
 
 ```
+
+
+<br>
+
+
+Principales comorbilidades en adultos:
+
+```{r}
+
+tbl_comorb_adult
+
+```
+
+
+
+Principales comorbilidades en población pediatrica:
+
+```{r}
+
+tbl_comorb_pediat
+
+```
+
+
 
 
 
