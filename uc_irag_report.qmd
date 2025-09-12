@@ -58,6 +58,33 @@ mapa_establ
 
 ## Analisis
 
+Definiciones de caso [^1]
+
+-   Infección Respiratoria Aguda Grave (IRAG):
+
+    Paciente de cualquier edad con infección respiratoria aguda con:
+
+    -   Fiebre referida o constatada \>= 38°C; y
+    -   Tos; y + Inicio del cuadro en los 10 días precedentes; y
+    -   Requerimiento de internación por criterio clínico
+
+-   Infección Respiratoria Aguda Grave (IRAG) extendida:
+
+    Toda persona menor de 2 años y mayor o igual a 60 años con:
+
+    -   Infección respiratoria: definida por tos o dificultad respiratoria; e
+    -   Inicio del cuadro en los 10 días precedentes; y
+    -   Requerimiento de internación por criterio clínico
+
+    En lactantes menores de 6 meses también considerar:
+
+    -   Apnea (cese temporal de la respiración por cualquier causa), o
+    -   Sepsis (fiebre/hipotermia y shock y gravemente enfermo sin causa aparente)
+
+
+[^1]: Vigilancia Centinela de Infeccion Respiratoria Aguda Grave (IRAG), Guia Operativa 2024. Dirección de Epidemiología, Ministerio de Salud, República Argentina.
+
+
 ### Semana de internación
 
 Distribución de los casos de IRAG e IRAG extendida por Semana Epidemiológica de Internación
@@ -112,9 +139,7 @@ grafica_comorb_irag_extend
 
 ```
 
-
 <br>
-
 
 Principales comorbilidades en adultos:
 
@@ -124,8 +149,6 @@ tbl_comorb_adult
 
 ```
 
-
-
 Principales comorbilidades en población pediatrica:
 
 ```{r}
@@ -133,9 +156,3 @@ Principales comorbilidades en población pediatrica:
 tbl_comorb_pediat
 
 ```
-
-
-
-
-
-
