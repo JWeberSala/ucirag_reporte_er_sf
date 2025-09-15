@@ -110,7 +110,7 @@ grafico_edad
 
 ```{r}
 #| fig-width: 8
-#| fig-height: 5
+#| fig-height: 7
 #| fig-align: "center"
 #| fig-cap: ""
 grafico_virus
