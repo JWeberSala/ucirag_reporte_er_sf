@@ -7,6 +7,7 @@ format:
     toc-title: "Índice"
     toc-depth: 4
     toc-location: left
+    embed-resources: true
 execute: 
   warning: false
   message: false
