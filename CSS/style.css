@@ -1,0 +1,105 @@
+/* Importa la fuente Manrope desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap');
+
+/* Aplica la fuente Manrope a todo el documento */
+body {
+    font-family: 'Manrope', sans-serif;
+    color: #415170; /* Color de texto principal (azul oscuro) */
+    background-color: white; /* Color de fondo principal */
+    text-align: justify;
+}
+
+/* Estilos de encabezados generales */
+h1, h2, h3, h4, h5, h6 {
+    color: #3162C5; /* Azul más vibrante para todos los encabezados */
+    font-weight: 700; /* Negrita para todos los encabezados */
+}
+
+/* Estilo específico para h1 y h2 */
+h1, h2 {
+    font-weight: 900; /* Más grueso para h1 y h2 */
+    font-size: 2.5em; /* Tamaño de fuente mayor para h1 */
+}
+
+h2 {
+    font-size: 2em; /* Tamaño de fuente ligeramente menor para h2 */
+}
+
+/* Estilo para enlaces */
+a {
+    color: #3A7CA5; /* Azul medio vibrante */
+    text-decoration: none;
+}
+a:hover {
+    color: #1A4B8C; /* Azul más intenso */
+    text-decoration: underline;
+}
+
+/* Modificación de tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #FFA630; /* Naranja más oscuro y vibrante */
+}
+th {
+    background-color: #1A4B8C; /* Azul intenso para encabezados */
+    color: #eaa851; /* Naranja claro para texto */
+    padding: 10px;
+}
+td {
+    padding: 8px;
+    border: 1px solid #1A4B8C; /* Borde azul */
+}
+
+/* Botones personalizados */
+button, .btn {
+    background-color: #3A7CA5; /* Azul vibrante */
+    color: #eaa851; /* Naranja claro para texto */
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+button:hover, .btn:hover {
+    background-color: #1A4B8C; /* Azul más intenso al pasar mouse */
+}
+
+/* Bloques de código */
+pre, code {
+    background-color: #3162C5 ; /* Azul intenso */
+    color: #eaa851; /* Naranja claro para texto */
+    padding: 8px;
+    border-radius: 4px;
+}
+
+/* Estilos de cuadros (blockquotes) */
+blockquote {
+    border-left: 4px solid #3A7CA5; /* Azul vibrante */
+    background-color: #eaa851; /* Naranja claro de fondo */
+    color: #1A4B8C; /* Azul oscuro para texto */
+    padding: 10px 20px;
+    font-style: italic;
+}
+/* Estilo para fijar el índice de contenido al costado izquierdo */
+.toc {
+    position: fixed;  /* Fija el índice en la pantalla */
+    top: 100px;       /* Ajusta la distancia desde la parte superior */
+    left: 10px;       /* Ajusta la distancia desde la izquierda */
+    width: 250px;     /* Define el ancho del índice */
+    max-height: 90vh; /* Limita la altura del índice */
+    overflow-y: auto; /* Habilita el desplazamiento si es necesario */
+    padding: 10px;    /* Añade algo de espacio dentro del índice */
+    background-color: #f0f8ff; /* Color de fondo suave */
+    border: 1px solid #3162C5; /* Borde azul */
+    border-radius: 10px; /* Bordes redondeados */
+    z-index: 1000;    /* Asegura que el índice esté por encima */
+}
+/* Estilo para el fondo de los tabsets */
+.tabset {
+    background-color: #f0f8ff; /* Color de fondo suave */
+    border: 2px solid #3162C5; /* Borde azul */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 20px; /* Espacio dentro del contenedor */
+    margin: 20px 0; /* Margen superior e inferior */
+    color: #3162C5; /* Color de la letra en azul */
+}

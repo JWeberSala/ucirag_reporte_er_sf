@@ -11,6 +11,9 @@ execute:
   warning: false
   message: false
   echo: false
+  
+include-in-header: header/header_er_sf.html
+css: CSS/style.css  
 ---
 
 ```{r}
@@ -60,6 +63,8 @@ mapa_establ
 
 Definiciones de caso [^1]
 
+[^1]: Vigilancia Centinela de Infeccion Respiratoria Aguda Grave (IRAG), Guia Operativa 2024. Dirección de Epidemiología, Ministerio de Salud, República Argentina.
+
 -   Infección Respiratoria Aguda Grave (IRAG):
 
     Paciente de cualquier edad con infección respiratoria aguda con:
@@ -80,10 +85,6 @@ Definiciones de caso [^1]
 
     -   Apnea (cese temporal de la respiración por cualquier causa), o
     -   Sepsis (fiebre/hipotermia y shock y gravemente enfermo sin causa aparente)
-
-
-[^1]: Vigilancia Centinela de Infeccion Respiratoria Aguda Grave (IRAG), Guia Operativa 2024. Dirección de Epidemiología, Ministerio de Salud, República Argentina.
-
 
 ### Semana de internación
 
@@ -125,6 +126,7 @@ Se notificaron un total de `r total_eventos` eventos. De estos, `r adultos_tot` 
 Distribución de casos de IRAG e IRAG extendida por grupo de edad según presencia de comorbilidades
 
 ```{r}
+#| include: false
 
 IRAG_COMORBILIDADES_BARRAS_FIG
 
