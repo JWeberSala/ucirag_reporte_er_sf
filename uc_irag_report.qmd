@@ -25,6 +25,8 @@ source('scripts/determinaciones.R')
 source('scripts/mapas.R')
 source('scripts/analisis_comorbilidades.R')
 source('scripts/comorb.R')
+source('scripts/analisis_gral.R')
+source('scripts/analisis_fallecidos.R')
 
 ```
 
@@ -62,7 +64,11 @@ mapa_establ
 
 ### Aspectos generales
 
-Este análisis se realiza teniendo en cuenta los datos registrados en el SNVS hasta la Semana Epidemiológica `r max_se_int` (`r inicio_sem` al `r fin_sem`) del año `r anio_reporte`.
+Este análisis se realiza teniendo en cuenta los datos registrados en el SNVS desde la Semana Epidemiológica (SE) `r SE_inicio` (`r inicio_seminicio` al `r fin_seminicio`) hasta la SE `r max_se_int` (`r inicio_sem` al `r fin_sem`) del año `r anio_reporte`.
+
+En este período se notificaron `r total_eventos` casos, de los cuales `r totalIRAG` corresponden a IRAG y `r total_IRAGext` a IRAG extendida.
+
+Del total de casos, `r men_15` fueron menores de 15 años y `r may_15`, mayores de esa edad.
 
 ### Semana de internación
 
@@ -137,6 +143,16 @@ tbl_comorb_pediat
 
 ```
 
+### Fallecidos
+
+`r frase_nro_falle`
+
+-   `r falle_etiología_flu`
+
+-   `r falle_etiología_COVID`
+
+-   `r falle_etiología_VSR`
+
 ## Notas importantes:
 
 1.  **Definición de caso: se encuentra estandarizada y corresponde a estándares nacionales e internacionales.**
@@ -170,6 +186,6 @@ Definiciones de caso [^1]
 
     Se definieron dos grandes grupos de edad para el análisis:
 
-    -   Pediátrica: de 0 a 15 años.
+    -   Pediátrica: de 0 a 14 años.
 
-    -   Adulta: de 16 años en adelante.
+    -   Adulta: de 15 años en adelante.

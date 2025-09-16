@@ -21,11 +21,10 @@ base <- read_csv2('data/UC_IRAG_EST80089.csv',
                                            EDAD_UC_IRAG == '3 a 5 Meses' ~ 'Menores de 6 Meses',
                                            T ~ EDAD_UC_IRAG))
   
-             
+
 # Sacamos la última semana
 max_se_int <- (max(base$SEPI_FECHA_INTER, na.rm = T) - 1)
 base <- base %>% dplyr::filter(SEPI_FECHA_INTER <= max_se_int)
-
 
 
 # Crear una secuencia de todas las fechas del año 2025
@@ -44,12 +43,12 @@ calendario_completo <- data.frame(fecha = fechas_2025) %>%
 inicio_sem <- format(first(calendario_completo %>% filter(semana_epi == max_se_int))[1,1], "%d de %B")
 fin_sem <- format(last(calendario_completo %>% filter(semana_epi == max_se_int))[1,1], "%d de %B")
 
+anio_inicio<-min(base$ANIO_MIN_INTERNACION)
+SE_inicio <- min(base$SEPI_MIN_INTERNACION) 
 
 
-
-
-
-
+inicio_seminicio <- format(first(calendario_completo %>% filter(semana_epi == SE_inicio))[1,1], "%d de %B")
+fin_seminicio <- format(last(calendario_completo %>% filter(semana_epi == SE_inicio))[1,1], "%d de %B")
 
 base$EDAD_UC_IRAG_2 <- factor(base$EDAD_UC_IRAG_2,
                               levels = c("Menores de 6 Meses", "6 a 11 Meses",
