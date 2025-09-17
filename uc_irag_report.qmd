@@ -25,6 +25,8 @@ source('scripts/determinaciones.R')
 source('scripts/mapas.R')
 source('scripts/analisis_comorbilidades.R')
 source('scripts/comorb.R')
+source('scripts/analisis_gral.R')
+source('scripts/analisis_fallecidos.R')
 
 ```
 
@@ -34,19 +36,13 @@ Las infecciones respiratorias agudas (IRAs) constituyen una importante causa de 
 
 La estrategia propuesta por OPS de vigilancia centinela implica la recolección de datos en forma sistemática y oportuna, a través de un número limitado de establecimientos seleccionados en base a ciertos criterios preespecificados.
 
-Este informe es generado de manera conjunta por los equipos de Entre Rios y Santa Fe, con el objetivo de analizar las características clínicas, epidemiológicas y laboratoriales de casos internados con diagnóstico de Infección Respiratoria Aguda Grave (IRAG) e IRAG extendida, en Unidades Centinelas provinciales.
+Este informe es generado de manera conjunta por los equipos de Entre Rios y Santa Fe, con el objetivo de analizar las características clínicas, epidemiológicas y laboratoriales de casos internados con diagnóstico de Infección Respiratoria Aguda Grave (IRAG) e IRAG extendida, en Unidades Centinelas (UC) provinciales.
 
-Este análisis se realiza teniendo en cuenta los datos registrados en el SNVS hasta la Semana Epidemiológica `r max_se_int` (`r inicio_sem` al `r fin_sem`) del año `r anio_reporte`.
-
-## Objetivos
-
-------------------------------------------------------------------------
+## Objetivos del reporte
 
 Analizar las características clínicas, de laboratorio y epidemiológicas de las personas con IRAG e IRAG extendida correspondientes a las Unidades Centinela de las jurisdicciones de Santa Fe y Entre Ríos.
 
-## Establecimientos
-
-------------------------------------------------------------------------
+## Establecimientos: UC-IRAG
 
 La notificación bajo la estrategia de unidad centinela se lleva a cabo en los siguientes establecimientos:
 
@@ -60,32 +56,15 @@ mapa_establ
 
 ```
 
-## Analisis
+## Análisis
 
-Definiciones de caso [^1]
+### Aspectos generales
 
-[^1]: Vigilancia Centinela de Infeccion Respiratoria Aguda Grave (IRAG), Guia Operativa 2024. Dirección de Epidemiología, Ministerio de Salud, República Argentina.
+Este análisis se realiza teniendo en cuenta los datos registrados en el SNVS desde la Semana Epidemiológica (SE) `r SE_inicio` (`r inicio_seminicio` al `r fin_seminicio`) hasta la SE `r max_se_int` (`r inicio_sem` al `r fin_sem`) del año `r anio_reporte`.
 
--   Infección Respiratoria Aguda Grave (IRAG):
+En este período se notificaron `r total_eventos` casos, de los cuales `r totalIRAG` corresponden a IRAG y `r total_IRAGext` a IRAG extendida.
 
-    Paciente de cualquier edad con infección respiratoria aguda con:
-
-    -   Fiebre referida o constatada \>= 38°C; y
-    -   Tos; y + Inicio del cuadro en los 10 días precedentes; y
-    -   Requerimiento de internación por criterio clínico
-
--   Infección Respiratoria Aguda Grave (IRAG) extendida:
-
-    Toda persona menor de 2 años y mayor o igual a 60 años con:
-
-    -   Infección respiratoria: definida por tos o dificultad respiratoria; e
-    -   Inicio del cuadro en los 10 días precedentes; y
-    -   Requerimiento de internación por criterio clínico
-
-    En lactantes menores de 6 meses también considerar:
-
-    -   Apnea (cese temporal de la respiración por cualquier causa), o
-    -   Sepsis (fiebre/hipotermia y shock y gravemente enfermo sin causa aparente)
+Del total de casos, `r men_15` fueron menores de 15 años y `r may_15`, mayores de esa edad.
 
 ### Semana de internación
 
@@ -102,6 +81,10 @@ grafico_curvas
 Distribución de los casos de IRAG e IRAG extendida por grupos de edad
 
 ```{r}
+#| fig-width: 12
+#| fig-height: 8
+#| fig-column: page-right
+#| fig-cap: ""
 
 grafico_edad
 
@@ -109,11 +92,17 @@ grafico_edad
 
 ### Determinaciones
 
+`r frase_detecciones`
+
+A continuación, se observa la cantidad de detecciones de cada uno de los virus, según semana de internación y grandes grupos de edad.
+
 ```{r}
-#| fig-width: 8
-#| fig-height: 7
-#| fig-align: "center"
+#| fig-width: 12
+#| fig-height: 8
+#| fig-column: page-right
 #| fig-cap: ""
+
+
 grafico_virus
 
 ```
@@ -159,3 +148,58 @@ Principales comorbilidades en población pediatrica:
 tbl_comorb_pediat
 
 ```
+
+### Fallecidos
+
+`r frase_nro_falle`
+
+-   `r falle_etiología_flu`
+
+-   `r falle_etiología_COVID`
+
+-   `r falle_etiología_VSR`
+
+**Distribución de fallecidos por grupo de edad y agente etiológico identificado:**
+
+```{r}
+ tbl_frec_falle
+```
+
+Solo se incluyen en la tabla los grupos de edad con casos fallecidos notificados.
+
+## Notas importantes:
+
+1.  **Definición de caso: se encuentra estandarizada y corresponde a estándares nacionales e internacionales.**
+
+Definiciones de caso [^1]
+
+[^1]: Vigilancia Centinela de Infeccion Respiratoria Aguda Grave (IRAG), Guia Operativa 2024. Dirección de Epidemiología, Ministerio de Salud, República Argentina.
+
+-   Infección Respiratoria Aguda Grave (IRAG):
+
+    Paciente de cualquier edad con infección respiratoria aguda con:
+
+    -   Fiebre referida o constatada \>= 38°C; y
+    -   Tos; y + Inicio del cuadro en los 10 días precedentes; y
+    -   Requerimiento de internación por criterio clínico
+
+-   Infección Respiratoria Aguda Grave (IRAG) extendida:
+
+    Toda persona menor de 2 años y mayor o igual a 60 años con:
+
+    -   Infección respiratoria: definida por tos o dificultad respiratoria; e
+    -   Inicio del cuadro en los 10 días precedentes; y
+    -   Requerimiento de internación por criterio clínico
+
+    En lactantes menores de 6 meses también considerar:
+
+    -   Apnea (cese temporal de la respiración por cualquier causa), o
+    -   Sepsis (fiebre/hipotermia y shock y gravemente enfermo sin causa aparente)
+
+2.  **Grupos de edad:**
+
+    Se definieron dos grandes grupos de edad para el análisis:
+
+    -   Pediátrica: de 0 a 14 años.
+
+    -   Adulta: de 15 años en adelante.
