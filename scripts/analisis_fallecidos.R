@@ -141,10 +141,13 @@ orden_edad<- c(
 tabla_edad <- as.data.frame(orden_edad )
 
 
-frec_falle <- tabla_edad %>% 
-  left_join(frec_falle, by = c("orden_edad" = "EDAD_UC_IRAG_2" )) %>% 
-  rename( "Grupo de Edad" = "orden_edad")
+# frec_falle <- tabla_edad %>% 
+#   left_join(frec_falle, by = c("orden_edad" = "EDAD_UC_IRAG_2" )) %>% 
+#   rename( "Grupo de Edad" = "orden_edad")
 
+
+frec_falle <- frec_falle %>%
+  rename( "Grupo de Edad" = "EDAD_UC_IRAG_2")
 
 frec_falle <- frec_falle %>%
   mutate(across(where(is.numeric), ~replace_na(., 0)))

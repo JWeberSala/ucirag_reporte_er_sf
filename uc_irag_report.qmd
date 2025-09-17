@@ -165,6 +165,8 @@ tbl_comorb_pediat
  tbl_frec_falle
 ```
 
+Solo se incluyen en la tabla los grupos de edad con casos fallecidos notificados.
+
 ## Notas importantes:
 
 1.  **Definición de caso: se encuentra estandarizada y corresponde a estándares nacionales e internacionales.**
