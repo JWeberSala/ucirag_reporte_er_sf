@@ -40,36 +40,40 @@ sar_cov <- determinacion %>% filter(COVID_19_FINAL != 'Negativo') %>%
 
 
 deteterm_resumen <- rbind(negativos, vsr, influenza, sar_cov) %>% 
-                    count(SEPI_FECHA_INTER,poblacion, Determinacion) %>% 
                     mutate(Determinacion = case_when(Determinacion == 'Sin resultado'~ 'En estudio',
                                                      Determinacion == 'Positivo' ~ 'Sars-Cov2',
-                                                     T ~ Determinacion) )
+                                         str_detect(Determinacion, 'VSR') ~ 'VSR',
+                                         str_detect(Determinacion, 'Influenza') ~ 'Influenza',
+                                                     T ~ Determinacion) ) %>% 
+                    count(SEPI_FECHA_INTER,poblacion, Determinacion) 
                     
+
+
+
 
 
 deteterm_resumen$Determinacion <- factor(deteterm_resumen$Determinacion,
                                          levels = c("Negativo", "En estudio","Sars-Cov2",
-                                                    "VSR", "VSR A", "VSR B", 
-                                                    "Influenza A H1N1", "Influenza A (sin subtipificar)"))
+                                                    "Influenza", "VSR"))
 
 
 
 g <- ggplot(deteterm_resumen) +
   geom_bar(aes(x = SEPI_FECHA_INTER, y =n , fill = Determinacion ,
-               text = paste( Determinacion, '<br>',
+               text = paste( 'Semana ', SEPI_FECHA_INTER, '<br>',
+                             Determinacion, '<br>',
                              n)), 
            stat = 'identity', width = 1) +
   theme_classic() +
-  scale_x_continuous(breaks = seq(1, 52,1)) +
+  scale_x_continuous(breaks = seq(1, 52,2)) +
   scale_y_continuous(breaks = seq(0,100,2)) +
   scale_fill_manual(values = c('#bdbdbd', '#969696', '#74a9cf', 
-                               '#c2e699', '#78c679', '#238443',
-                               '#fecc5c', '#fd8d3c')) +
+                                '#78c679', '#fecc5c' )) +
   labs( title = '', 
         fill = '',
         x = 'Semana de Internación', y = 'Eventos',) +
-  theme(plot.title = element_text(hjust = 0.5, size = 13), legend.position = 'none')+
-  theme(legend.position = 'none') +
+  theme(plot.title = element_text(hjust = 0.5, size = 13))+
+#  theme(legend.position = 'none') +
   facet_wrap(~ poblacion, ncol = 1)
 
 grafico_virus <- ggplotly(g, tooltip = c("text"))
