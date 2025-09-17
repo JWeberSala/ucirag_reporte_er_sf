@@ -159,6 +159,12 @@ tbl_comorb_pediat
 
 -   `r falle_etiología_VSR`
 
+**Distribución de fallecidos por grupo de edad y agente etiológico identificado:**
+
+```{r}
+ tbl_frec_falle
+```
+
 ## Notas importantes:
 
 1.  **Definición de caso: se encuentra estandarizada y corresponde a estándares nacionales e internacionales.**
