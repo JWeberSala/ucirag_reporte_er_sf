@@ -40,12 +40,9 @@ Este informe es generado de manera conjunta por los equipos de Entre Rios y Sant
 
 ## Objetivos del reporte
 
-
 Analizar las características clínicas, de laboratorio y epidemiológicas de las personas con IRAG e IRAG extendida correspondientes a las Unidades Centinela de las jurisdicciones de Santa Fe y Entre Ríos.
 
-
 ## Establecimientos: UC-IRAG
-
 
 La notificación bajo la estrategia de unidad centinela se lleva a cabo en los siguientes establecimientos:
 
@@ -84,6 +81,10 @@ grafico_curvas
 Distribución de los casos de IRAG e IRAG extendida por grupos de edad
 
 ```{r}
+#| fig-width: 12
+#| fig-height: 8
+#| fig-column: page-right
+#| fig-cap: ""
 
 grafico_edad
 
@@ -96,10 +97,12 @@ grafico_edad
 A continuación, se observa la cantidad de detecciones de cada uno de los virus, según semana de internación y grandes grupos de edad.
 
 ```{r}
-#| fig-width: 8
-#| fig-height: 7
-#| fig-align: "center"
+#| fig-width: 12
+#| fig-height: 8
+#| fig-column: page-right
 #| fig-cap: ""
+
+
 grafico_virus
 
 ```
