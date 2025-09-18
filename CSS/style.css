@@ -103,3 +103,12 @@ blockquote {
     margin: 20px 0; /* Margen superior e inferior */
     color: #3162C5; /* Color de la letra en azul */
 }
+
+
+
+/* --------- TOC fijo --------- */
+.sidebar nav#TOC {
+  position: sticky;
+  top: 120px;   /* se baja 120px desde arriba */
+}
+
