@@ -1,12 +1,22 @@
 # Introducción
 
-Hola a todos, este proyecto fue creado para obtener un reporte automatizado de la información recolectada en Unidades Centinelas.
+Este proyecto fue creado para obtener un reporte automatizado de la información recolectada en Unidades Centinelas.
 
 # scripts/leer_base.R
 
 ## Librerías utilizadas
 
-library(tidyverse) library(readr) library(readxl) library(janitor) library(stringr) library(lubridate)
+library(tidyverse)
+
+library(readr)
+
+library(readxl)
+
+library(janitor)
+
+library(stringr)
+
+library(lubridate)
 
 ##año de reporte anio_reporte \<- year(today())
 
@@ -38,7 +48,19 @@ base$EDAD_UC_IRAG_2 <- factor(base$EDAD_UC_IRAG_2, levels = c("Menores de 6 Mese
 
 ## Librerías utilizadas
 
-library(tidyverse) library(readr) library(readxl) library(janitor) library(stringr) library(lubridate) library(plotly)
+library(tidyverse)
+
+library(readr)
+
+library(readxl)
+
+library(janitor)
+
+library(stringr)
+
+library(lubridate)
+
+library(plotly)
 
 ## Tabla semana epidemiológica y población (pediátrica y adultos): se construye tabla para poder luego graficar las variables que se detallan
 
@@ -52,7 +74,19 @@ g \<- ggplot(tbl_curvas) + geom_bar(aes(x = SEPI_FECHA_INTER, y = n, fill = pobl
 
 ## Librerías utilizadas
 
-library(tidyverse) library(readr) library(readxl) library(janitor) library(stringr) library(lubridate) library(plotly)
+library(tidyverse)
+
+library(readr)
+
+library(readxl)
+
+library(janitor)
+
+library(stringr)
+
+library(lubridate)
+
+library(plotly)
 
 ## Tabla clasificación manual y edad: se construye tabla para poder luego graficar las variables que se detallan
 
@@ -66,7 +100,19 @@ g \<- ggplot(tbl_edad) + geom_bar(aes(x = EDAD_UC_IRAG_2, y = n, fill = CLASIFIC
 
 ## Librerías utilizadas
 
-library(tidyverse) library(readr) library(readxl) library(janitor) library(stringr) library(lubridate) library(plotly)
+library(tidyverse)
+
+library(readr)
+
+library(readxl)
+
+library(janitor)
+
+library(stringr)
+
+library(lubridate)
+
+library(plotly)
 
 ### Determinaciones: resultados “negativos” (covid, influenzam ó VSR), resultados “positivos” para (covid, influenzam ó VSR) y resultado “Sin resultado” (covid, influenzam ó VSR) los cuales se mencionarán como “En estudio”.
 
@@ -92,7 +138,11 @@ grafico_virus \<- ggplotly(g, tooltip = c("text"))
 
 ## Librerías utilizadas
 
-library(geoAr) library(tidyverse) library(leaflet)
+library(geoAr)
+
+library(tidyverse)
+
+library(leaflet)
 
 ## Lectura de Excel con coordenadas de los establecimientos con Unidad Centinela
 
@@ -102,7 +152,19 @@ establecimientos \<- read_excel('data/establ_coord.xlsx') mapa_establ\<- leaflet
 
 ## Librerías utilizadas
 
-library(tidyverse) library(readr) library(readxl) library(janitor) library(stringr) library(lubridate) library(plotly)
+library(tidyverse)
+
+library(readr)
+
+library(readxl)
+
+library(janitor)
+
+library(stringr)
+
+library(lubridate)
+
+library(plotly)
 
 ## Análisis comorbilidades por grupos de edad:
 
@@ -185,7 +247,23 @@ covid_COMORBILIDADES_BARRAS_FIG \<- covid_COMORBILIDADES_BARRAS_FIG %\>% layout(
 
 ## Librerías utilizadas
 
-library(tidyverse) library(readr) library(readxl) library(janitor) library(stringr) library(lubridate) library(highcharter) library(plotly) library(flextable)
+library(tidyverse)
+
+library(readr)
+
+library(readxl)
+
+library(janitor)
+
+library(stringr)
+
+library(lubridate)
+
+library(highcharter)
+
+library(plotly)
+
+library(flextable)
 
 ### Presencia de comorbilidad y grupo de edad: 1 (con comorbilidad), 2 (sin comorbilidad), 9 (sin dato de comorbilidad). Grupos de edad detallados.
 
