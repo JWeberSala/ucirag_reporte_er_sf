@@ -88,34 +88,34 @@ Se utilizó la base proporcionada semanalmente por el Ministerio de Salud de la 
 
 # Análisis descriptivo de los datos
 
--   distribución de los casos de IRAG e IRAG extendida por grandes grupos de edad (pediátrico y adultos).
+-   distribución de los casos de IRAG e IRAG extendida por grupos de edad (pediátrico y adultos) y semana epidemiológica
 
--   distribución de los casos de IRAG e IRAG extendida por grupos de edad con mayor nivel de desagregación.
+-   distribución de los casos de IRAG e IRAG extendida por grupos de edad, con mayor nivel de desagregación.
 
 -   distribución de los casos de IRAG e IRAG extendida por determinaciones.
 
 -   distribución de los casos de IRAG e IRAG extendida por grupos de edad según presencia o no de comorbilidades.
 
--   distribución de los de los casos de IRAG e IRAG extendida por grupos de edad según condición de fallecido o no.
+-   distribución de los de los casos de IRAG e IRAG extendida fallecidos por grupos de edad y diagnóstico etiológico
 
 
 # Mapa del circuito de datos
 
 El flujo de los datos desde la captación hasta su análisis final es el siguiente:
 
-1)  en el establecimiento (Unidad Centinela) se recolecta la información y carga en el SNVS 2.0.
+1)  Recolección de la información en el establecimiento (Unidad Centinela) y registro en el SNVS 2.0.
 
-2)  procesamiento de la base en nación para tener una base con un único registro por paciente.
+2)  Exportación, depuración y procesamiento de la base en el Ministerio de Salud de la Nación para obtener una base con un único registro por paciente.
 
-3)  envío semanal desde nación a las provincias de la base.
+3)  Envío semanal desde el Ministerio de Salud de la Nación a puntos focales de las provincias o unidades centinela.
 
-4)  descarga de la base de datos en la provincia.
+4)  Descarga de la base de datos en la provincia o unidad centinela.
 
-5)  automatización del reporte.
+5)  Ejecución del reporte.
 
-6)  auditoría del reporte.
+6)  Auditoría del reporte.
 
-7)  difusión del reporte.
+7)  Difusión del reporte.
 
 # Reportes
 
@@ -123,7 +123,7 @@ El flujo de los datos desde la captación hasta su análisis final es el siguien
 
 Se actualizará la información de los casos con el siguiente análisis:
 
--   distribución de los casos de IRAG e IRAG extendida por grandes grupos de edad (pediátrico y adultos).
+-   distribución de los casos de IRAG e IRAG extendida por grupos de edad (pediátrico y adultos) y semana epidemiológica
 
 -   distribución de los casos de IRAG e IRAG extendida por grupos de edad con mayor nivel de desagregación.
 
@@ -133,7 +133,7 @@ Se actualizará la información de los casos con el siguiente análisis:
 
 Se actualizará la información de los casos con el siguiente análisis:
 
--   distribución de los casos de IRAG e IRAG extendida por grandes grupos de edad (pediátrico y adultos).
+-   distribución de los casos de IRAG e IRAG extendida por grupos de edad (pediátrico y adultos) y semana epidemiológica
 
 -   distribución de los casos de IRAG e IRAG extendida por grupos de edad con mayor nivel de desagregación.
 
@@ -141,5 +141,5 @@ Se actualizará la información de los casos con el siguiente análisis:
 
 -   distribución de los casos de IRAG e IRAG extendida por grupos de edad según presencia o no de comorbilidades.
 
--   distribución de los de los casos de IRAG e IRAG extendida por grupos de edad según condición de fallecido o no.
+-   distribución de los de los casos de IRAG e IRAG extendida fallecidos por grupos de edad y diagnóstico etiológico
 
