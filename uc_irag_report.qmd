@@ -81,7 +81,7 @@ grafico_curvas
 
 ### Grupos de edad
 
-Distribución de los casos de IRAG e IRAG extendida por grupos de edad
+A continuación, se observa la distribución de los casos de IRAG e IRAG extendida por grupos de edad
 
 ```{r}
 #| fig-width: 12
