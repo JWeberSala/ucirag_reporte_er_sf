@@ -68,7 +68,10 @@ Del total de casos, `r men_15` fueron menores de 15 años y `r may_15`, mayores 
 
 ### Semana de internación
 
-Distribución de los casos de IRAG e IRAG extendida por Semana Epidemiológica de Internación
+`r frase_semanas`\
+`r frase_max`
+
+A continuación, se puede observar la distribución de los casos de IRAG e IRAG extendida por Semana Epidemiológica de Internación
 
 ```{r}
 
@@ -109,11 +112,11 @@ grafico_virus
 
 ### Comorbilidades
 
-Se notificaron un total de `r total_eventos` eventos. De estos, `r adultos_tot` ocurrieron en adultos (15 años o más), y `r adultos_con_comorb` de ellos presentaban alguna comorbilidad. En la población pediátrica (menores de 15 años) se registraron `r pediat_tot` eventos, de los cuales `r pediat_con_comorb` presentaban alguna comorbilidad.
+Del total de casos en adultos (`r adultos_tot`), `r adultos_con_comorb` presentó alguna comorbilidad. Del total de casos pediátricos (`r pediat_tot`), `r pediat_con_comorb` presentó alguna comorbilidad.
 
 <br>
 
-Distribución de casos de IRAG e IRAG extendida por grupo de edad según presencia de comorbilidades
+A continuación, se puede observar la distribución de casos de IRAG e IRAG extendida por grupo de edad según presencia de comorbilidades
 
 ```{r}
 #| include: false

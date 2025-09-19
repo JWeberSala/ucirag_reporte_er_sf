@@ -28,17 +28,27 @@ nro_VSR<- sum(
 
 
 #para frase de determinaciones
-frase_COVID <- ifelse(nro_COVID > 0,
-                      paste0(nro_COVID, " casos de COVID-19"),
-                      NA)
+# frase_COVID <- ifelse(nro_COVID > 0,
+#                       paste0(nro_COVID, " casos de COVID-19"),
+#                       NA)
+# 
+# frase_FLU <- ifelse(nro_FLU > 0,
+#                     paste0(nro_FLU, " casos de Influenza"),
+#                     NA)
+# 
+# frase_VSR <- ifelse(nro_VSR > 0,
+#                     paste0(nro_VSR, " casos de VSR"),
+#                     NA)
 
-frase_FLU <- ifelse(nro_FLU > 0,
-                    paste0(nro_FLU, " casos de Influenza"),
-                    NA)
-
-frase_VSR <- ifelse(nro_VSR > 0,
-                    paste0(nro_VSR, " casos de VSR"),
-                    NA)
+frase_COVID <- ifelse(nro_COVID > 1,
+                      paste0(nro_COVID, " casos de COVID-19"),ifelse(nro_COVID==1, "1 caso de COVID-19", NA))
+                
+frase_FLU <- ifelse(nro_FLU > 1,
+                      paste0(nro_FLU, " casos de Influenza"),ifelse(nro_FLU==1, "1 caso de Influenza", NA))
+                    
+frase_VSR <- ifelse(nro_VSR > 1,
+                      paste0(nro_VSR, " casos de VSR"),ifelse(nro_VSR==1, "1 caso de VSR", NA))
+                     
 
 # Unir frases que no son NA
 frases_pos <- na.omit(c(frase_COVID, frase_FLU, frase_VSR))

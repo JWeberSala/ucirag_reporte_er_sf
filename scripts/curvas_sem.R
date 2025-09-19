@@ -30,7 +30,25 @@ g <- ggplot(tbl_curvas) +
 grafico_curvas <- ggplotly(g, tooltip = c("text")) 
 
   
+# cantidad de semanas con al menos un caso
+semanas_con_casos <- tbl_curvas %>%
+  filter(n > 0) %>%
+  summarise(cant = n_distinct(SEPI_FECHA_INTER)) %>%
+  pull(cant)
 
+# semana con mayor número de casos
+semana_max_casos <- tbl_curvas %>%
+  filter(n == max(n)) %>%
+  slice(1) %>%   # por si hay más de una semana empatada
+  select(SEPI_FECHA_INTER, n)
+
+# armar frases para incluir en el informe
+frase_semanas <- paste0("Se registraron casos en ", semanas_con_casos, 
+                        " semanas del año.")
+
+frase_max <- paste0("La mayor notificación se observó en la semana ", 
+                    semana_max_casos$SEPI_FECHA_INTER, 
+                    " con ", semana_max_casos$n, " casos.")
 
 
 
