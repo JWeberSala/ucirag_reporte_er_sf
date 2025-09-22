@@ -95,7 +95,17 @@ grafico_edad
 
 ### Determinaciones
 
-`r frase_detecciones`
+::: {layout-ncol="2"}
+`r frase_detecciones` 
+`r frase_codeteccion`
+
+```{r}
+tabla_virus
+
+```
+:::
+
+
 
 A continuación, se observa la cantidad de detecciones de cada uno de los virus, según semana de internación y grandes grupos de edad.
 
